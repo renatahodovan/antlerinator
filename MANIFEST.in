@@ -1,0 +1,4 @@
+include README.rst
+include LICENSE.rst
+include MANIFEST.in
+include antlerinator/config.json

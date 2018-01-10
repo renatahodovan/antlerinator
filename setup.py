@@ -1,4 +1,4 @@
-# Copyright (c) 2017 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2018 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -26,7 +26,7 @@ setup(
     author_email='hodovan@inf.u-szeged.hu, akiss@inf.u-szeged.hu',
     description='ANTLeRinator',
     long_description=open('README.rst').read(),
-    install_requires=[runtime_req],
+    install_requires=[runtime_req, 'typing; python_version<"3.5"'],
     zip_safe=False,
     include_package_data=True,
     entry_points={

@@ -2,3 +2,5 @@ include README.rst
 include LICENSE.rst
 include MANIFEST.in
 include antlerinator/config.json
+global-exclude __pycache__
+global-exclude *.py[co]

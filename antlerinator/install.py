@@ -1,18 +1,23 @@
-# Copyright (c) 2017 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2019 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
 # This file may not be copied, modified, or distributed except
 # according to those terms.
 
+import contextlib
 import errno
 import json
 import pkgutil
-import urllib.request
 
 from argparse import ArgumentParser
 from os import makedirs
-from os.path import dirname, exists, expanduser, join
+from os.path import dirname, exists, expanduser, isdir, join
+
+try:
+    from urllib.request import urlopen
+except ImportError:
+    from urllib2 import urlopen
 
 
 config = json.loads(pkgutil.get_data(__package__, 'config.json').decode('ascii'))
@@ -20,9 +25,9 @@ __version__ = config['version']
 antlr_jar_path = join(expanduser('~'), '.antlerinator', config['tool_name'])
 
 
-def install(*, force=False, lazy=False):
+def install(force=False, lazy=False):
     """
-    Download the ANTLR v4 tool jar. (Raises :exception:`FileExistsError` if jar
+    Download the ANTLR v4 tool jar. (Raises :exception:`OSError` if jar
     is already available, unless ``lazy`` is ``True``.)
 
     :param bool force: Force download even if local jar already exists.
@@ -34,13 +39,14 @@ def install(*, force=False, lazy=False):
         if lazy:
             return
         if not force:
-            raise FileExistsError(errno.EEXIST, 'file already exists', antlr_jar_path)
+            raise OSError(errno.EEXIST, 'file already exists', antlr_jar_path)
 
     tool_url = config['tool_url']
-    with urllib.request.urlopen(tool_url) as response:
+    with contextlib.closing(urlopen(tool_url)) as response:
         tool_jar = response.read()
 
-    makedirs(dirname(antlr_jar_path), exist_ok=True)
+    if not isdir(dirname(antlr_jar_path)):
+        makedirs(dirname(antlr_jar_path))
 
     with open(antlr_jar_path, mode='wb') as tool_file:
         tool_file.write(tool_jar)

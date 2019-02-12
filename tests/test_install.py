@@ -1,4 +1,4 @@
-# Copyright (c) 2017 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2019 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -41,6 +41,6 @@ def test_cli():
 def test_api():
     antlerinator.install(force=True)
     antlerinator.install(lazy=True)
-    with pytest.raises(FileExistsError):
+    with pytest.raises(OSError):
         antlerinator.install()
     run_antlr()

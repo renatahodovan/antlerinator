@@ -2,14 +2,14 @@
 ANTLeRinator
 ============
 
-*ANTLeRinator* is a Python 3 utility package to help keeping components of
+*ANTLeRinator* is a Python utility package to help keeping components of
 ANTLR v4 in sync.
 
 
 Requirements
 ============
 
-* Python_ >= 3.4
+* Python_ ~= 2.7 or >= 3.4
 * pip_ and setuptools Python packages (the latter is automatically installed by
   pip)
 * Java_ SE >= 7 JRE or JDK (the latter is optional)

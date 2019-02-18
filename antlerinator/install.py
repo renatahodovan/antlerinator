@@ -9,6 +9,7 @@ import contextlib
 import errno
 import json
 import pkgutil
+import ssl
 
 from argparse import ArgumentParser
 from os import makedirs
@@ -42,7 +43,8 @@ def install(force=False, lazy=False):
             raise OSError(errno.EEXIST, 'file already exists', antlr_jar_path)
 
     tool_url = config['tool_url']
-    with contextlib.closing(urlopen(tool_url)) as response:
+    ssl_context = ssl.create_default_context(purpose=ssl.Purpose.CLIENT_AUTH)
+    with contextlib.closing(urlopen(tool_url, context=ssl_context)) as response:
         tool_jar = response.read()
 
     if not isdir(dirname(antlr_jar_path)):

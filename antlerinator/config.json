@@ -4,6 +4,6 @@
     "antlr4-python2-runtime==4.7.1; python_version~='2.7'",
     "antlr4-python3-runtime==4.7.1; python_version>='3.0'"
   ],
-  "tool_url": "http://www.antlr.org/download/antlr-4.7.1-complete.jar",
+  "tool_url": "https://www.antlr.org/download/antlr-4.7.1-complete.jar",
   "tool_name": "antlr-4.7.1-complete.jar"
 }

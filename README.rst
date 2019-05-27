@@ -2,6 +2,11 @@
 ANTLeRinator
 ============
 
+.. image:: https://badge.fury.io/py/antlerinator.svg
+   :target: https://badge.fury.io/py/antlerinator
+.. image:: https://travis-ci.org/renatahodovan/antlerinator.svg?branch=master
+   :target: https://travis-ci.org/renatahodovan/antlerinator
+
 *ANTLeRinator* is a Python utility package to help keeping components of
 ANTLR v4 in sync.
 

@@ -14,7 +14,7 @@ ANTLR v4 in sync.
 Requirements
 ============
 
-* Python_ ~= 2.7 or >= 3.4
+* Python_ ~= 2.7 or >= 3.5
 * pip_ and setuptools Python packages (the latter is automatically installed by
   pip)
 * Java_ SE >= 7 JRE or JDK (the latter is optional)

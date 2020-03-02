@@ -51,7 +51,7 @@ A common form of *ANTLeRinator*'s usage:
     parser.add_argument('--antlr', default=antlerinator.antlr_jar_path)
     args = parser.parse_args()
 
-    if (args.antlr == antlerinator.antlr_jar_path):
+    if args.antlr == antlerinator.antlr_jar_path:
         antlerinator.install(lazy=True)
     subprocess.call(['java', '-jar', args.antlr])
 

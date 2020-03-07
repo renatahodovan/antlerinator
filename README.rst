@@ -7,6 +7,8 @@ ANTLeRinator
 .. image:: https://travis-ci.org/renatahodovan/antlerinator.svg?branch=master
    :target: https://travis-ci.org/renatahodovan/antlerinator
 
+.. start included documentation
+
 *ANTLeRinator* is a Python utility package to help keeping components of
 ANTLR v4 in sync.
 
@@ -58,6 +60,8 @@ A common form of *ANTLeRinator*'s usage:
 Should there be need for manual jar installation, a helper script is available::
 
     antlerinator-install
+
+.. end included documentation
 
 
 Copyright and Licensing

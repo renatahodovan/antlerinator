@@ -27,6 +27,12 @@ setup(
     description='ANTLeRinator',
     long_description=open('README.rst').read(),
     install_requires=runtime_req + ['typing; python_version<"3.5"'],
+    extras_require={
+        'docs': [
+            'sphinx',
+            'sphinx_rtd_theme',
+        ]
+    },
     zip_safe=False,
     include_package_data=True,
     entry_points={

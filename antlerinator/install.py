@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2019 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2020 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -28,8 +28,8 @@ antlr_jar_path = join(expanduser('~'), '.antlerinator', config['tool_name'])
 
 def install(force=False, lazy=False):
     """
-    Download the ANTLR v4 tool jar. (Raises :exception:`OSError` if jar
-    is already available, unless ``lazy`` is ``True``.)
+    Download the ANTLR v4 tool jar. (Raises :exc:`OSError` if jar is already
+    available, unless ``lazy`` is ``True``.)
 
     :param bool force: Force download even if local jar already exists.
     :param bool lazy: Don't report an error if local jar already exists and

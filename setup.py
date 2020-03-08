@@ -31,6 +31,7 @@ setup(
         'docs': [
             'sphinx',
             'sphinx_rtd_theme',
+            'sphinxcontrib-runcmd',
         ]
     },
     zip_safe=False,

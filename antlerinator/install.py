@@ -73,7 +73,3 @@ def execute():
     args = arg_parser.parse_args()
 
     install(force=args.force, lazy=args.lazy)
-
-
-if __name__ == '__main__':
-    execute()

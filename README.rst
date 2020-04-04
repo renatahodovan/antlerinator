@@ -2,9 +2,11 @@
 ANTLeRinator
 ============
 
-.. image:: https://badge.fury.io/py/antlerinator.svg
-   :target: https://badge.fury.io/py/antlerinator
-.. image:: https://travis-ci.org/renatahodovan/antlerinator.svg?branch=master
+.. image:: https://img.shields.io/pypi/v/antlerinator?logo=python&logoColor=white
+   :target: https://pypi.org/project/antlerinator/
+.. image:: https://img.shields.io/pypi/l/antlerinator?logo=open-source-initiative&logoColor=white
+   :target: https://pypi.org/project/antlerinator/
+.. image:: https://img.shields.io/travis/renatahodovan/antlerinator/master?logo=travis&logoColor=white
    :target: https://travis-ci.org/renatahodovan/antlerinator
 
 .. start included documentation

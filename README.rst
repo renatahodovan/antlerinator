@@ -6,8 +6,8 @@ ANTLeRinator
    :target: https://pypi.org/project/antlerinator/
 .. image:: https://img.shields.io/pypi/l/antlerinator?logo=open-source-initiative&logoColor=white
    :target: https://pypi.org/project/antlerinator/
-.. image:: https://img.shields.io/travis/renatahodovan/antlerinator/master?logo=travis&logoColor=white
-   :target: https://travis-ci.org/renatahodovan/antlerinator
+.. image:: https://img.shields.io/github/workflow/status/renatahodovan/antlerinator/main/master?logo=github&logoColor=white
+   :target: https://github.com/renatahodovan/antlerinator/actions
 
 .. start included documentation
 

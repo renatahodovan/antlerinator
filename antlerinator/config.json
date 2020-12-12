@@ -1,9 +1,9 @@
 {
-  "version": "4.8",
+  "version": "4.9",
   "runtime_req": [
-    "antlr4-python2-runtime==4.8; python_version~='2.7'",
-    "antlr4-python3-runtime==4.8; python_version>='3.0'"
+    "antlr4-python2-runtime==4.9; python_version~='2.7'",
+    "antlr4-python3-runtime==4.9; python_version>='3.0'"
   ],
-  "tool_url": "https://www.antlr.org/download/antlr-4.8-complete.jar",
-  "tool_name": "antlr-4.8-complete.jar"
+  "tool_url": "https://www.antlr.org/download/antlr-4.9-complete.jar",
+  "tool_name": "antlr-4.9-complete.jar"
 }

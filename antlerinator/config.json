@@ -1,9 +1,0 @@
-{
-  "version": "4.9.2",
-  "runtime_req": [
-    "antlr4-python2-runtime==4.9.2; python_version~='2.7'",
-    "antlr4-python3-runtime==4.9.2; python_version>='3.0'"
-  ],
-  "tool_url": "https://www.antlr.org/download/antlr-4.9.2-complete.jar",
-  "tool_name": "antlr-4.9.2-complete.jar"
-}

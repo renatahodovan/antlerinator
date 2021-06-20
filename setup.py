@@ -1,24 +1,16 @@
-# Copyright (c) 2017-2020 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2021 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
 # This file may not be copied, modified, or distributed except
 # according to those terms.
 
-import json
-
-from os.path import dirname, join
 from setuptools import setup, find_packages
-
-with open(join(dirname(__file__), 'antlerinator', 'config.json'), 'r') as f:
-    config = json.load(f)
-    runtime_req = config['runtime_req']
-    version = config['version']
 
 
 setup(
     name='antlerinator',
-    version=version,
+    version='4.9.2',
     packages=find_packages(),
     url='https://github.com/renatahodovan/antlerinator',
     license='BSD',
@@ -26,7 +18,12 @@ setup(
     author_email='hodovan@inf.u-szeged.hu, akiss@inf.u-szeged.hu',
     description='ANTLeRinator',
     long_description=open('README.rst').read(),
-    install_requires=runtime_req + ['typing; python_version<"3.5"'],
+    install_requires=[
+        'antlr4-python2-runtime==4.9.2; python_version~="2.7"',
+        'antlr4-python3-runtime==4.9.2; python_version>="3.0"',
+        'setuptools',
+        'typing; python_version<"3.5"',
+    ],
     extras_require={
         'docs': [
             'sphinx',

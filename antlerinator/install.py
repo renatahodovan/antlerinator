@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2020 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2021 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -7,8 +7,6 @@
 
 import contextlib
 import errno
-import json
-import pkgutil
 import ssl
 
 from argparse import ArgumentParser
@@ -20,10 +18,15 @@ try:
 except ImportError:
     from urllib2 import urlopen
 
+import pkg_resources
 
-config = json.loads(pkgutil.get_data(__package__, 'config.json').decode('ascii'))
-__version__ = config['version']
-antlr_jar_path = join(expanduser('~'), '.antlerinator', config['tool_name'])
+
+__version__ = pkg_resources.get_distribution(__package__).version
+
+tool_url = 'https://www.antlr.org/download/antlr-4.9.2-complete.jar'
+tool_name = 'antlr-4.9.2-complete.jar'
+
+antlr_jar_path = join(expanduser('~'), '.antlerinator', tool_name)
 
 
 def install(force=False, lazy=False):
@@ -42,7 +45,6 @@ def install(force=False, lazy=False):
         if not force:
             raise OSError(errno.EEXIST, 'file already exists', antlr_jar_path)
 
-    tool_url = config['tool_url']
     ssl_context = ssl.create_default_context(purpose=ssl.Purpose.CLIENT_AUTH)
     with contextlib.closing(urlopen(tool_url, context=ssl_context)) as response:
         tool_jar = response.read()

@@ -19,8 +19,7 @@ Requirements
 ============
 
 * Python_ ~= 2.7 or >= 3.5
-* pip_ and setuptools Python packages (the latter is automatically installed by
-  pip)
+* pip_
 * Java_ SE >= 7 JRE or JDK (the latter is optional)
 
 .. _Python: https://www.python.org
@@ -35,9 +34,9 @@ The quick way::
 
     pip install antlerinator
 
-Alternatively, by cloning the project and running setuptools::
+Alternatively, by cloning the project and performing a local install::
 
-    python setup.py install
+    pip install .
 
 
 Usage

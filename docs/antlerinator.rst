@@ -6,8 +6,7 @@ Package ``antlerinator``
    :members:
    :imported-members:
 
-.. data:: antlr_jar_path
+.. data:: __antlr_version__
    :type: str
-   :value: '~/.antlerinator/antlr-N.M-complete.jar'
 
-   The default file path to download the ANTLR v4 tool jar to.
+   Version of the antlr4 runtime package, if installed, ``None`` otherwise.

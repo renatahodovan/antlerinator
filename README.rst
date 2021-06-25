@@ -50,17 +50,21 @@ A common form of *ANTLeRinator*'s usage:
     import argparse
     import subprocess
 
+    assert antlerinator.__antlr_version__ is not None
+
     parser = argparse.ArgumentParser()
-    parser.add_argument('--antlr', default=antlerinator.antlr_jar_path)
+    parser.add_argument('--antlr')
     args = parser.parse_args()
 
-    if args.antlr == antlerinator.antlr_jar_path:
-        antlerinator.install(lazy=True)
+    if not args.antlr:
+        args.antlr = antlerinator.download(lazy=True)
+
     subprocess.call(['java', '-jar', args.antlr])
 
-Should there be need for manual jar installation, a helper script is available::
+Should there be need for downloading the ANTLR v4 tool jar manually, a helper
+script is available::
 
-    antlerinator-install
+    antlerinator-download
 
 .. end included documentation
 

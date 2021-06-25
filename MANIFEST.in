@@ -1,5 +1,0 @@
-include README.rst
-include LICENSE.rst
-include MANIFEST.in
-global-exclude __pycache__
-global-exclude *.py[co]

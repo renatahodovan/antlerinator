@@ -1,8 +1,8 @@
-# Copyright (c) 2017-2020 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2021 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
 # This file may not be copied, modified, or distributed except
 # according to those terms.
 
-from .install import __version__, antlr_jar_path, install
+from .download import __antlr_version__, __version__, default_antlr_jar_path, download

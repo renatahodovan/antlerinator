@@ -25,4 +25,5 @@ ANTLeRinator
    :caption: Miscellaneous
    :maxdepth: 1
 
+   relnotes
    license

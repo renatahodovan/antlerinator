@@ -53,11 +53,10 @@ A common form of *ANTLeRinator*'s usage:
     assert antlerinator.__antlr_version__ is not None
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--antlr')
+    antlerinator.add_antlr_argument(parser)
     args = parser.parse_args()
 
-    if not args.antlr:
-        args.antlr = antlerinator.download(lazy=True)
+    antlerinator.process_antlr_argument(args)
 
     subprocess.call(['java', '-jar', args.antlr])
 

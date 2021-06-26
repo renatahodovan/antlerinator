@@ -18,6 +18,7 @@ try:
 except ImportError:
     from urllib2 import urlopen
 
+import inators
 import pkg_resources
 
 
@@ -107,7 +108,8 @@ def execute():
     mode_group.add_argument('--lazy', action='store_true', default=False,
                             help='don\'t report an error if jar already exists at the output path and don\'t try to download it either')
 
-    arg_parser.add_argument('--version', action='version', version='%(prog)s {version}'.format(version=__version__))
+    inators.arg.add_version_argument(arg_parser, __version__)
+
 
     args = arg_parser.parse_args()
 

@@ -5,4 +5,5 @@
 # This file may not be copied, modified, or distributed except
 # according to those terms.
 
+from .arg import add_antlr_argument, process_antlr_argument
 from .download import __antlr_version__, __version__, default_antlr_jar_path, download

@@ -110,7 +110,6 @@ def execute():
 
     inators.arg.add_version_argument(arg_parser, __version__)
 
-
     args = arg_parser.parse_args()
 
     download(version=args.antlr_version, path=args.output, force=args.force, lazy=args.lazy)

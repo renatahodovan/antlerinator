@@ -21,6 +21,18 @@ jobs:
       - run: pip install --upgrade tox
       - run: tox -v -e py
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - run: pip install --upgrade tox
+      - run: tox -v -e lint
+
   docs:
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +46,7 @@ jobs:
       - run: tox -v -e docs
 
   publish:
-    needs: [test, docs]
+    needs: [test, lint, docs]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

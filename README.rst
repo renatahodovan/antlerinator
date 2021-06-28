@@ -32,8 +32,11 @@ Requirements
 Install
 =======
 
-To use *ANTLeRinator*, it can be added to ``setup.cfg`` as an install
-requirement:
+*ANTLeRinator* has both run-time and build-time components, therefore it can be
+used both as an install requirement and as a setup requirement.
+
+To use *ANTLeRinator* at run-time, it can be added to ``setup.cfg`` as an
+install requirement:
 
 .. code-block:: ini
 
@@ -44,6 +47,18 @@ requirement:
         antlr4-python3-runtime==4.9.2; python_version>="3.0"  # optional
 
 Note that *ANTLeRinator* has no direct dependency on the *ANTLRv4* runtime.
+
+To use *ANTLeRinator* at build-time, it can be added to ``pyproject.toml`` as a
+build system/setup requirement:
+
+.. code-block:: toml
+
+    [build-system]
+    requires = [
+        "antlerinator",
+        "setuptools",
+    ]
+    build-backend = "setuptools.build_meta"
 
 To install *ANTLeRinator* manually, e.g., into a virtual environment, go the
 quick way::
@@ -116,6 +131,43 @@ jar to use. The default processing of the argument, also provided by
     antlerinator.process_antlr_argument(args)
 
     subprocess.call(['java', '-jar', args.antlr])
+
+Building lexers/parsers at build-time with ANTLRv4
+--------------------------------------------------
+
+*ANTLeRinator* also extends *Setuptools* to allow building lexers/parsers at
+build-time from ``.g4`` grammars. It adds two new *Setuptools* commands,
+``build_antlr`` and ``clean_antlr``, to perform the building and the cleanup of
+lexers/parsers, and also ensures that these new commands are invoked by the
+standard ``build`` (``install``), ``develop``, ``clean``, and ``sdist`` commands
+as appropriate. The building of lexers/parsers is performed using the *ANTLRv4*
+tool and is controlled by the ``[build_antlr]`` section in ``setup.cfg``:
+
+.. code-block:: ini
+
+    [build_antlr]
+    commands =
+        antlerinator:4.9.2 path/to/Dummy.g4 -Dlanguage=Python2 -o pkg/parser/py2 -Xexact-output-dir
+        antlerinator:4.9.2 path/to/Dummy.g4 -Dlanguage=Python3 -o pkg/parser/py3 -Xexact-output-dir
+    output =
+        pkg/parser/py?/Dummy*.py
+    #java =
+
+The ``commands`` option of ``build_antlr`` lists the invocations of the
+*ANTLRv4* tool. The first element of each invocation is a so-called provider
+specification that defines where to get the *ANTLRv4* tool jar from. Currently,
+two providers are supported: ``antlerinator:N.M`` uses *ANTLeRinator* to
+download the requested version of the tool jar (if necessary), while
+``file:/path/to/antlr.jar`` uses the explicitly given tool jar. The rest of the
+elements of each invocation are passed to the tool jar as command line
+arguments.
+
+The ``java`` option can be given to explicitly specify which Java VM to use to
+run the *ANTLRv4* tool (``java`` is used by default).
+
+The ``output`` option shall list the file names or glob patterns of the output
+of the *ANTLRv4* tool invocations. The ``clean_antlr`` command removes these
+files on cleanup.
 
 .. end included documentation
 

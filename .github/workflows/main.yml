@@ -45,6 +45,24 @@ jobs:
       - run: pip install --upgrade tox
       - run: tox -v -e docs
 
+  cov:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - run: pip install --upgrade tox coveralls
+      - run: tox -v -e cov
+      - run: coveralls --service=github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   publish:
     needs: [test, lint, docs]
     runs-on: ubuntu-latest

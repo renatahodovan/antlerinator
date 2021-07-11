@@ -30,11 +30,25 @@ Requirements
 Install
 =======
 
-The quick way::
+To use *ANTLeRinator*, it can be added to ``setup.cfg`` as an install
+requirement:
+
+.. code-block:: ini
+
+    [options]
+    install_requires =
+        antlerinator
+        antlr4-python2-runtime==4.9.2; python_version~="2.7"  # optional
+        antlr4-python3-runtime==4.9.2; python_version>="3.0"  # optional
+
+Note that *ANTLeRinator* has no direct dependency on the *ANTLRv4* runtime.
+
+To install *ANTLeRinator* manually, e.g., into a virtual environment, go the
+quick way::
 
     pip install antlerinator
 
-Alternatively, by cloning the project and performing a local install::
+Alternatively, clone the project and perform a local install::
 
     pip install .
 
@@ -42,7 +56,48 @@ Alternatively, by cloning the project and performing a local install::
 Usage
 =====
 
-A common form of *ANTLeRinator*'s usage:
+Downloading the ANTLRv4 tool jar file at run-time
+-------------------------------------------------
+
+If the *ANTLRv4* runtime is installed, *ANTLeRinator* can be used to download
+the corresponding version of the tool jar file:
+
+.. code-block:: python
+
+    import antlerinator
+
+    assert antlerinator.__antlr_version__ is not None  # alternatively: import antlr4
+
+    path = antlerinator.download(lazy=True)
+
+If the *ANTLRv4* runtime is not installed or a different version of the tool jar
+is needed, the required version must/can be specified:
+
+.. code-block:: python
+
+    import antlerinator
+
+    path = antlerinator.download(version='4.9.2', lazy=True)
+
+By default, these approaches download files to a ``~/.antlerinator`` directory,
+and only if necessary (i.e., the jar file has not been downloaded yet).
+
+Downloading the ANTLRv4 tool jar manually
+-----------------------------------------
+
+Should there be need for downloading the ANTLR v4 tool jar manually, a helper
+script is available::
+
+    antlerinator-download --help
+
+Adding ANTLRv4 support to the command line interface
+----------------------------------------------------
+
+If an application has an ``ArgumentParser``-based command line interface,
+*ANTLeRinator* can be used to add a CLI argument to specify which *ANTLRv4* tool
+jar to use. The default processing of the argument, also provided by
+*ANTLeRinator*, is to download the tool jar version corresponding to the
+*ANTLRv4* runtime if necessary:
 
 .. code-block:: python
 
@@ -59,11 +114,6 @@ A common form of *ANTLeRinator*'s usage:
     antlerinator.process_antlr_argument(args)
 
     subprocess.call(['java', '-jar', args.antlr])
-
-Should there be need for downloading the ANTLR v4 tool jar manually, a helper
-script is available::
-
-    antlerinator-download
 
 .. end included documentation
 

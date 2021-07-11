@@ -45,8 +45,8 @@ def process_antlr_argument(args):
     Lazily download the ANTLR v4 tool jar to the default path if ``--antlr`` was
     *not* given on the command line. I.e., download and copy the jar to the
     default path if it is not already there (using
-    :func:`antlerinator.download`). No-op if ``--antlr`` was specified on the
-    command line.
+    :func:`antlerinator.download`). Also set ``args.antlr`` to the path to the
+    jar. No-op if ``--antlr`` was specified on the command line.
 
     This implements the default processing of the ``--antlr`` command-line
     argument added by :func:`add_antlr_argument`.

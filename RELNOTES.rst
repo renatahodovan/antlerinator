@@ -4,6 +4,18 @@
 
 .. start included documentation
 
+1!1.1.0
+=======
+
+Summary of changes:
+
+* Implemented setuptools extension to help lexer/parser generation at
+  build-time.
+* Moved from flat layout to src layout.
+* Improved testing (linting, coverage information).
+* Improved documentation.
+
+
 1!1.0.0
 =======
 

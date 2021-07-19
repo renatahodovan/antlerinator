@@ -21,11 +21,9 @@ Requirements
 ============
 
 * Python_ ~= 2.7 or >= 3.5
-* pip_
 * Java_ SE >= 7 JRE or JDK (the latter is optional)
 
 .. _Python: https://www.python.org
-.. _pip: https://pip.pypa.io
 .. _Java: https://www.oracle.com/java/
 
 
@@ -36,7 +34,7 @@ Install
 used both as an install requirement and as a setup requirement.
 
 To use *ANTLeRinator* at run-time, it can be added to ``setup.cfg`` as an
-install requirement:
+install requirement (if using setuptools_ with declarative config):
 
 .. code-block:: ini
 
@@ -49,7 +47,7 @@ install requirement:
 Note that *ANTLeRinator* has no direct dependency on the *ANTLRv4* runtime.
 
 To use *ANTLeRinator* at build-time, it can be added to ``pyproject.toml`` as a
-build system/setup requirement:
+build system/setup requirement (if using PEP517_ builds):
 
 .. code-block:: toml
 
@@ -60,14 +58,20 @@ build system/setup requirement:
     ]
     build-backend = "setuptools.build_meta"
 
-To install *ANTLeRinator* manually, e.g., into a virtual environment, go the
-quick way::
+To install *ANTLeRinator* manually, e.g., into a virtual environment, use pip_::
 
     pip install antlerinator
 
-Alternatively, clone the project and perform a local install::
+The above approaches install the latest release of *ANTLeRinator* from PyPI_.
+Alternatively, for the development version, clone the project and perform a
+local install::
 
     pip install .
+
+.. _setuptools: https://github.com/pypa/setuptools
+.. _PEP517: https://www.python.org/dev/peps/pep-0517/
+.. _pip: https://pip.pypa.io
+.. _PyPI: https://pypi.org/
 
 
 Usage

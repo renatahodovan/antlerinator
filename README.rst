@@ -20,7 +20,7 @@ ANTLR v4 in sync.
 Requirements
 ============
 
-* Python_ ~= 2.7 or >= 3.5
+* Python_ >= 3.5
 * Java_ SE >= 7 JRE or JDK (the latter is optional)
 
 .. _Python: https://www.python.org
@@ -41,8 +41,7 @@ install requirement (if using setuptools_ with declarative config):
     [options]
     install_requires =
         antlerinator
-        antlr4-python2-runtime==4.9.2; python_version~="2.7"  # optional
-        antlr4-python3-runtime==4.9.2; python_version>="3.0"  # optional
+        antlr4-python3-runtime==4.9.2  # optional
 
 Note that *ANTLeRinator* has no direct dependency on the *ANTLRv4* runtime.
 

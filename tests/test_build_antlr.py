@@ -95,7 +95,7 @@ def test_build(tmpdir):
             name='pkg',
             packages=['pkg'],
             script_name='setup.py',
-            script_args=['build', '--build-lib={buildlib}'.format(buildlib=join('build', 'lib'))],  # NOTE: --build-lib is necessary to ensure that purelib build directory is used on py2
+            script_args=['build', '--build-lib={buildlib}'.format(buildlib=join('build', 'lib'))],  # NOTE: --build-lib is necessary to ensure that purelib build directory is used
             options=dict(
                 build_antlr=dict(
                     commands='antlerinator:{tested_antlr_version} {grammar} -Dlanguage=Python3 -o {pkgdir} -Xexact-output-dir'.format(

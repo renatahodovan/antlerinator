@@ -11,12 +11,8 @@ import ssl
 
 from argparse import ArgumentParser
 from os import makedirs
-from os.path import basename, dirname, exists, expanduser, isdir, join
-
-try:
-    from urllib.request import urlopen
-except ImportError:
-    from urllib2 import urlopen
+from os.path import basename, dirname, exists, expanduser, join
+from urllib.request import urlopen
 
 import inators
 import pkg_resources
@@ -80,8 +76,7 @@ def download(version=None, path=None, force=False, lazy=False):
         tool_bytes = response.read()
 
     tool_dir = dirname(tool_path)
-    if not isdir(tool_dir):
-        makedirs(tool_dir)
+    makedirs(tool_dir, exist_ok=True)
 
     with open(tool_path, mode='wb') as tool_file:
         tool_file.write(tool_bytes)

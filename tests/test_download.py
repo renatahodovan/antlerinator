@@ -15,21 +15,18 @@ import antlerinator
 
 def run_antlr(jar_path):
     cmd = ('java', '-jar', jar_path)
-    proc = subprocess.Popen(cmd)
-    proc.communicate()
-    assert proc.returncode == 0
+    subprocess.run(cmd, check=True)
 
 
 def run_download(args, exp_ok):
     cmd = (sys.executable, '-m', 'antlerinator') + args
 
-    proc = subprocess.Popen(cmd)
-    proc.communicate()
+    returncode = subprocess.run(cmd, check=False).returncode
 
     if exp_ok:
-        assert proc.returncode == 0
+        assert returncode == 0
     else:
-        assert proc.returncode != 0
+        assert returncode != 0
 
 
 @pytest.mark.parametrize('antlr_version', [

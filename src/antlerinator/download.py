@@ -44,7 +44,7 @@ def default_antlr_jar_path(version=None):
     return join(expanduser('~'), '.antlerinator', 'antlr-{version}-complete.jar'.format(version=version))
 
 
-def download(version=None, path=None, force=False, lazy=False):
+def download(version=None, path=None, *, force=False, lazy=False):
     """
     Download the ANTLR v4 tool jar. (Raises :exc:`OSError` if jar is already
     available, unless ``lazy`` is ``True``.)
@@ -103,7 +103,7 @@ def execute():
     mode_group.add_argument('--lazy', action='store_true', default=False,
                             help='don\'t report an error if jar already exists at the output path and don\'t try to download it either')
 
-    inators.arg.add_version_argument(arg_parser, __version__)
+    inators.arg.add_version_argument(arg_parser, version=__version__)
 
     args = arg_parser.parse_args()
 

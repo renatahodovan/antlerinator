@@ -14,11 +14,12 @@ def add_antlr_argument(
         parser,
         short_alias=(),
         long_alias=(),
+        *,
         metavar='FILE',
-        help='path of the ANTLR v4 tool jar file (default: %s)' % default_antlr_jar_path(__antlr_version__ or 'VERSION'),
+        help='path of the ANTLR v4 tool jar file (default: %s)' % default_antlr_jar_path(__antlr_version__ or 'VERSION')
 ):
     """
-    add_antlr_argument(parser, short_alias=(), long_alias=(), metavar='FILE', help='path of the ANTLR v4 tool jar file (default:  ~/.antlerinator/antlr-VERSION-complete.jar)')
+    add_antlr_argument(parser, short_alias=(), long_alias=(), *, metavar='FILE', help='path of the ANTLR v4 tool jar file (default:  ~/.antlerinator/antlr-VERSION-complete.jar)')
 
     Add an ``--antlr`` command-line argument to ``parser``.
 

@@ -4,6 +4,17 @@
 
 .. start included documentation
 
+1!2.0.0
+=======
+
+Summary of changes:
+
+* Dropped support for Python 2.
+* Changed API, introduced keyword-only arguments.
+* Improved documentation.
+* Improved testing (on PyPy).
+
+
 1!1.1.0
 =======
 

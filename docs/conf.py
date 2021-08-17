@@ -42,6 +42,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinxcontrib.runcmd',
+    'inators.sphinx.argdoc',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

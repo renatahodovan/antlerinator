@@ -33,6 +33,8 @@ def add_antlr_argument(
     :type long_alias: str or list(str) or tuple(str)
     :param str metavar: Override the default argument name in usage messages.
     :param str help: Override the default description of ``--antlr``.
+
+    .. argdoc {'help': 'path of the ANTLR v4 tool jar file (default:  ~/.antlerinator/antlr-VERSION-complete.jar)'}
     """
     # NOTE: The first line of the docstring (i.e., the documented signature)
     #   must be kept in sync with the actual signature of the function!

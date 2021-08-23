@@ -14,15 +14,19 @@ from os import makedirs
 from os.path import basename, dirname, exists, expanduser, join
 from urllib.request import urlopen
 
+try:
+    from importlib import metadata
+except ImportError:
+    import importlib_metadata as metadata
+
 import inators
-import pkg_resources
 
 
-__version__ = pkg_resources.get_distribution(__package__).version
+__version__ = metadata.version(__package__)
 
 try:
-    __antlr_version__ = pkg_resources.get_distribution('antlr4-python3-runtime').version
-except pkg_resources.DistributionNotFound:
+    __antlr_version__ = metadata.version('antlr4-python3-runtime')
+except metadata.PackageNotFoundError:
     __antlr_version__ = None
 
 

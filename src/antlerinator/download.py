@@ -20,13 +20,10 @@ import pkg_resources
 
 __version__ = pkg_resources.get_distribution(__package__).version
 
-__antlr_version__ = None
-for dist_spec in ('antlr4-python3-runtime', 'antlr4-python2-runtime'):
-    try:
-        __antlr_version__ = pkg_resources.get_distribution(dist_spec).version
-        break
-    except pkg_resources.DistributionNotFound:
-        pass
+try:
+    __antlr_version__ = pkg_resources.get_distribution('antlr4-python3-runtime').version
+except pkg_resources.DistributionNotFound:
+    __antlr_version__ = None
 
 
 def default_antlr_jar_path(version=None):

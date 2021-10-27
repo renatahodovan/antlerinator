@@ -4,6 +4,17 @@
 
 .. start included documentation
 
+1!2.0.1
+=======
+
+Summary of changes:
+
+* Fixed SSL context creation.
+* Internal refactorings (to access package metadata).
+* Improved testing (on Python 3.10).
+* Improved documentation.
+
+
 1!2.0.0
 =======
 

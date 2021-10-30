@@ -72,7 +72,7 @@ def download(version=None, path=None, *, force=False, lazy=False):
         if not force:
             raise OSError(errno.EEXIST, 'file already exists', tool_path)
 
-    ssl_context = ssl.create_default_context(purpose=ssl.Purpose.CLIENT_AUTH)
+    ssl_context = ssl.create_default_context(purpose=ssl.Purpose.SERVER_AUTH)
     with contextlib.closing(urlopen(tool_url, context=ssl_context)) as response:
         tool_bytes = response.read()
 

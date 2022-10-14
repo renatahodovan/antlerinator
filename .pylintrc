@@ -10,6 +10,7 @@
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
 disable=
+    useless-option-value,
     line-too-long, fixme, missing-docstring, invalid-name, no-self-use, unused-argument,
     wildcard-import, unused-wildcard-import, ungrouped-imports,
     too-many-arguments, too-many-locals,
@@ -18,7 +19,7 @@ disable=
     redefined-builtin, broad-except, protected-access,
     useless-object-inheritance, unnecessary-pass, duplicate-code,
     function-redefined, attribute-defined-outside-init, consider-using-with,
-    consider-using-f-string
+    consider-using-f-string, deprecated-module
 
 [REPORTS]
 

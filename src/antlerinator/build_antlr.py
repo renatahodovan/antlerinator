@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2021-2022 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -103,7 +103,7 @@ class clean_antlr(Command):
 
     def run(self):
         output = self.get_finalized_command('build_antlr').output
-        files = [f for o in output for f in glob.glob(o)]  # NOTE: glob(,recursive=True) omitted because of py2
+        files = [f for o in output for f in glob.glob(o, recursive=True)]
         for f in files:
             self.execute(os.unlink, (f,))
 

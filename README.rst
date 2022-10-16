@@ -143,7 +143,8 @@ build-time from ``.g4`` grammars. It adds two new *Setuptools* commands,
 ``build_antlr`` and ``clean_antlr``, to perform the building and the cleanup of
 lexers/parsers, and also ensures that these new commands are invoked by the
 standard ``build`` (``install``), ``develop``, ``clean``, and ``sdist`` commands
-as appropriate. The building of lexers/parsers is performed using the *ANTLRv4*
+as well as by the *Setuptools*-internal ``editable_wheel`` command as
+appropriate. The building of lexers/parsers is performed using the *ANTLRv4*
 tool and is controlled by the ``[build_antlr]`` section in ``setup.cfg``:
 
 .. code-block:: ini

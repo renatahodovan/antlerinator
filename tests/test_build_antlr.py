@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2021-2022 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -10,6 +10,7 @@ import sys
 
 from os import makedirs
 from os.path import abspath, dirname, isfile, join
+from distutils.errors import DistutilsModuleError
 from setuptools.dist import Distribution
 
 import antlerinator
@@ -20,6 +21,12 @@ script_ext = '.bat' if is_windows else '.sh'
 
 tested_antlr_version = '4.9.2'
 resources_dir = join(dirname(abspath(__file__)), 'resources')
+
+try:
+    Distribution().get_command_class('editable_wheel')
+    has_editable_wheel = True
+except DistutilsModuleError:
+    has_editable_wheel = False
 
 
 def test_build_antlr_providers(tmpdir):
@@ -118,7 +125,8 @@ def test_build(tmpdir):
 
 def test_develop(tmpdir):
     """
-    Test whether lexer/parser generation happens for editable installs.
+    Test whether lexer/parser generation happens for editable installs (via
+    development mode).
     """
     with tmpdir.as_cwd():
         dist = Distribution(dict(
@@ -126,6 +134,38 @@ def test_develop(tmpdir):
             packages=['pkg'],
             script_name='setup.py',
             script_args=['develop'],
+            options=dict(
+                build_antlr=dict(
+                    commands='antlerinator:{tested_antlr_version} {grammar} -Dlanguage=Python3 -o {pkgdir} -Xexact-output-dir'.format(
+                        tested_antlr_version=tested_antlr_version,
+                        grammar=join(resources_dir, 'Hello.g4'),
+                        pkgdir=join(str(tmpdir), 'pkg'),
+                    ),
+                ),
+            ),
+        ))
+        makedirs('pkg')
+        open(join('pkg', '__init__.py'), 'w').close()
+
+        dist.parse_command_line()
+        dist.run_commands()
+
+        assert isfile(join('pkg', 'HelloLexer.py'))
+        assert isfile(join('pkg', 'HelloParser.py'))
+
+
+@pytest.mark.skipif(not has_editable_wheel, reason='editable_wheel command unavailable')
+def test_editable_wheel(tmpdir):
+    """
+    Test whether lexer/parser generation happens for editable installs (via
+    editable wheels).
+    """
+    with tmpdir.as_cwd():
+        dist = Distribution(dict(
+            name='pkg',
+            packages=['pkg'],
+            script_name='setup.py',
+            script_args=['editable_wheel'],
             options=dict(
                 build_antlr=dict(
                     commands='antlerinator:{tested_antlr_version} {grammar} -Dlanguage=Python3 -o {pkgdir} -Xexact-output-dir'.format(

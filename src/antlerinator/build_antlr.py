@@ -11,7 +11,7 @@ import re
 import shlex
 import sys
 
-from distutils.errors import DistutilsOptionError
+from distutils.errors import DistutilsModuleError, DistutilsOptionError
 from setuptools import Command
 
 from .download import download
@@ -139,3 +139,16 @@ def register(dist):
     dist.cmdclass['develop'] = antlerinator_develop
     dist.cmdclass['clean'] = antlerinator_clean
     dist.cmdclass['sdist'] = antlerinator_sdist
+
+    # Patch editable_wheel only if available
+    try:
+        editable_wheel = dist.get_command_class('editable_wheel')
+
+        class antlerinator_editable_wheel(editable_wheel):
+            def run(self):
+                self.run_command('build_antlr')
+                editable_wheel.run(self)
+
+        dist.cmdclass['editable_wheel'] = antlerinator_editable_wheel
+    except DistutilsModuleError:
+        pass

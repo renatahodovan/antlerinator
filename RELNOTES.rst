@@ -4,6 +4,18 @@
 
 .. start included documentation
 
+1!2.1.0
+=======
+
+Summary of changes:
+
+* Enabled use of recursive wildcard patterns in the output option of the
+  setuptools extension.
+* Extended/fixed setuptools extension to also handle editable wheels.
+* Improved testing (linting).
+* Improved metadata.
+
+
 1!2.0.1
 =======
 

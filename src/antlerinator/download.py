@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2021 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2022 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -42,7 +42,7 @@ def default_antlr_jar_path(version=None):
     version = version or __antlr_version__
     if not version:
         raise ValueError('version must be specified if antlr4 runtime is not installed')
-    return join(expanduser('~'), '.antlerinator', 'antlr-{version}-complete.jar'.format(version=version))
+    return join(expanduser('~'), '.antlerinator', f'antlr-{version}-complete.jar')
 
 
 def download(version=None, path=None, *, force=False, lazy=False):
@@ -64,7 +64,7 @@ def download(version=None, path=None, *, force=False, lazy=False):
 
     default_tool_path = default_antlr_jar_path(version)
     tool_path = path or default_tool_path
-    tool_url = 'https://www.antlr.org/download/{name}'.format(name=basename(default_tool_path))
+    tool_url = f'https://www.antlr.org/download/{basename(default_tool_path)}'
 
     if exists(tool_path):
         if lazy:
@@ -96,7 +96,7 @@ def execute():
     arg_parser.add_argument('--antlr-version', metavar='VERSION', default=__antlr_version__,
                             help='version of ANTLR v4 tool jar to download (default: %(default)s)')
     arg_parser.add_argument('--output', metavar='FILE', default=None,
-                            help='path to save the downloaded jar to (default: %s)' % default_antlr_jar_path('VERSION').replace(expanduser('~'), '~'))
+                            help=f'path to save the downloaded jar to (default: {default_antlr_jar_path("VERSION").replace(expanduser("~"), "~")})')
 
     mode_group = arg_parser.add_mutually_exclusive_group()
     mode_group.add_argument('--force', action='store_true', default=False,

@@ -44,7 +44,7 @@ class build_antlr(Command):
             commands = [cmd.strip() for cmd in commands if cmd.strip()]
 
         if not isinstance(commands, list):
-            raise DistutilsOptionError("'commands' must be a list of strings or tuples (got %r)" % commands)
+            raise DistutilsOptionError(f"'commands' must be a list of strings or tuples (got {commands!r})")
 
         cmd_re = re.compile('^(?P<provider>^[^\\d\\W]\\w*):(?P<provider_arg>\\S*)\\s+(?P<antlr_args>.*)$')
         providers = {
@@ -57,21 +57,21 @@ class build_antlr(Command):
             if isinstance(cmd, str):
                 m = cmd_re.match(cmd)
                 if not m:
-                    raise DistutilsOptionError("strings in 'commands' must start with a 'provider:arg' pattern (got %r)" % cmd)
+                    raise DistutilsOptionError(f"strings in 'commands' must start with a 'provider:arg' pattern (got {cmd!r})")
                 provider, provider_arg, antlr_args = m.group('provider', 'provider_arg', 'antlr_args')
 
                 provider = providers.get(provider)
                 if not provider:
-                    raise DistutilsOptionError("unknown provider in 'commands' (options: %s; got: %s)" % (', '.join(providers.keys()), provider))
+                    raise DistutilsOptionError(f"unknown provider in 'commands' (options: {', '.join(providers.keys())}; got: {provider})")
                 antlr_args = tuple(shlex.split(antlr_args, posix=posix))
 
                 cmd = (provider, provider_arg, antlr_args)
 
             if isinstance(cmd, tuple):
                 if len(cmd) != 3:
-                    raise DistutilsOptionError("tuples in 'commands' must be 3-tuples (got %r)" % cmd)
+                    raise DistutilsOptionError(f"tuples in 'commands' must be 3-tuples (got {cmd!r})")
             else:
-                raise DistutilsOptionError("elements in 'commands' must be strings or tuples (got %r)" % commands)
+                raise DistutilsOptionError(f"elements in 'commands' must be strings or tuples (got {commands!r})")
 
             commands[i] = cmd
 

@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2021 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2022 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -46,15 +46,15 @@ def run_download(args, exp_ok):
 class TestDownload(object):
 
     def test_cli(self, antlr_version, default_path, tmpdir):
-        args = ['--antlr-version=%s' % antlr_version]
+        args = [f'--antlr-version={antlr_version}']
 
         if not default_path:
             jar_path = os.path.join(str(tmpdir), 'antlr4.jar')
-            args += ['--output=%s' % jar_path]
+            args += [f'--output={jar_path}']
         else:
             jar_path = antlerinator.default_antlr_jar_path(antlr_version)
 
-        run_download(args=tuple(args) + ('--force', ),exp_ok=True)
+        run_download(args=tuple(args) + ('--force', ), exp_ok=True)
         run_download(args=tuple(args) + ('--lazy', ), exp_ok=True)
         run_download(args=tuple(args), exp_ok=False)
         run_antlr(jar_path)

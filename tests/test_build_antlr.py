@@ -44,16 +44,10 @@ def test_build_antlr_providers(tmpdir):
             script_args=['build_antlr'],
             options=dict(
                 build_antlr=dict(
-                    commands='''
-                        antlerinator:{tested_antlr_version} {grammar1} -Dlanguage=Python3 -o {tmpdir} -Xexact-output-dir
-                        file:{antlr_jar_path} {grammar2} -Dlanguage=Python3 -o {tmpdir} -Xexact-output-dir
-                    '''.format(
-                        tested_antlr_version=tested_antlr_version,
-                        antlr_jar_path=antlr_jar_path,
-                        grammar1=join(resources_dir, 'Hello.g4'),
-                        grammar2=join(resources_dir, 'Bello.g4'),
-                        tmpdir=tmpdir,
-                    ),
+                    commands=f'''
+                        antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {tmpdir} -Xexact-output-dir
+                        file:{antlr_jar_path} {join(resources_dir, "Bello.g4")} -Dlanguage=Python3 -o {tmpdir} -Xexact-output-dir
+                    ''',
                 ),
             ),
         ))
@@ -79,7 +73,7 @@ def test_build_antlr_java(tmpdir):
             options=dict(
                 build_antlr=dict(
                     commands='file:antlr.jar Dummy.g4',
-                    java=join(resources_dir, 'mock_java') + script_ext,
+                    java=f'{join(resources_dir, "mock_java")}{script_ext}',
                 ),
             ),
         ))
@@ -102,14 +96,10 @@ def test_build(tmpdir):
             name='pkg',
             packages=['pkg'],
             script_name='setup.py',
-            script_args=['build', '--build-lib={buildlib}'.format(buildlib=join('build', 'lib'))],  # NOTE: --build-lib is necessary to ensure that purelib build directory is used
+            script_args=['build', f'--build-lib={join("build", "lib")}'],  # NOTE: --build-lib is necessary to ensure that purelib build directory is used
             options=dict(
                 build_antlr=dict(
-                    commands='antlerinator:{tested_antlr_version} {grammar} -Dlanguage=Python3 -o {pkgdir} -Xexact-output-dir'.format(
-                        tested_antlr_version=tested_antlr_version,
-                        grammar=join(resources_dir, 'Hello.g4'),
-                        pkgdir=join(str(tmpdir), 'pkg'),
-                    ),
+                    commands=f'antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {join(str(tmpdir), "pkg")} -Xexact-output-dir',
                 ),
             ),
         ))
@@ -136,11 +126,7 @@ def test_develop(tmpdir):
             script_args=['develop'],
             options=dict(
                 build_antlr=dict(
-                    commands='antlerinator:{tested_antlr_version} {grammar} -Dlanguage=Python3 -o {pkgdir} -Xexact-output-dir'.format(
-                        tested_antlr_version=tested_antlr_version,
-                        grammar=join(resources_dir, 'Hello.g4'),
-                        pkgdir=join(str(tmpdir), 'pkg'),
-                    ),
+                    commands=f'antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {join(str(tmpdir), "pkg")} -Xexact-output-dir',
                 ),
             ),
         ))
@@ -168,11 +154,7 @@ def test_editable_wheel(tmpdir):
             script_args=['editable_wheel'],
             options=dict(
                 build_antlr=dict(
-                    commands='antlerinator:{tested_antlr_version} {grammar} -Dlanguage=Python3 -o {pkgdir} -Xexact-output-dir'.format(
-                        tested_antlr_version=tested_antlr_version,
-                        grammar=join(resources_dir, 'Hello.g4'),
-                        pkgdir=join(str(tmpdir), 'pkg'),
-                    ),
+                    commands=f'antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {join(str(tmpdir), "pkg")} -Xexact-output-dir',
                 ),
             ),
         ))

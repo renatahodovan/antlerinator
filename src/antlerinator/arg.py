@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2021-2022 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -16,7 +16,7 @@ def add_antlr_argument(
         long_alias=(),
         *,
         metavar='FILE',
-        help='path of the ANTLR v4 tool jar file (default: %s)' % default_antlr_jar_path(__antlr_version__ or 'VERSION')
+        help=f'path of the ANTLR v4 tool jar file (default: {default_antlr_jar_path(__antlr_version__ or "VERSION")})'
 ):
     """
     add_antlr_argument(parser, short_alias=(), long_alias=(), *, metavar='FILE', help='path of the ANTLR v4 tool jar file (default:  ~/.antlerinator/antlr-VERSION-complete.jar)')

@@ -6,7 +6,7 @@ ANTLeRinator
    :target: https://pypi.org/project/antlerinator/
 .. image:: https://img.shields.io/pypi/l/antlerinator?logo=open-source-initiative&logoColor=white
    :target: https://pypi.org/project/antlerinator/
-.. image:: https://img.shields.io/github/workflow/status/renatahodovan/antlerinator/main/master?logo=github&logoColor=white
+.. image:: https://img.shields.io/github/actions/workflow/status/renatahodovan/antlerinator/main.yml?branch=master&logo=github&logoColor=white
    :target: https://github.com/renatahodovan/antlerinator/actions
 .. image:: https://img.shields.io/coveralls/github/renatahodovan/antlerinator/master?logo=coveralls&logoColor=white
    :target: https://coveralls.io/github/renatahodovan/antlerinator

@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2021-2023 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -113,7 +113,6 @@ def register(dist):
     build = dist.get_command_class('build')
     develop = dist.get_command_class('develop')
     clean = dist.get_command_class('clean')
-    sdist = dist.get_command_class('sdist')
 
     class antlerinator_build(build):
         def run(self):
@@ -130,15 +129,9 @@ def register(dist):
             self.run_command('clean_antlr')
             clean.run(self)
 
-    class antlerinator_sdist(sdist):
-        def run(self):
-            self.run_command('clean_antlr')
-            sdist.run(self)
-
     dist.cmdclass['build'] = antlerinator_build
     dist.cmdclass['develop'] = antlerinator_develop
     dist.cmdclass['clean'] = antlerinator_clean
-    dist.cmdclass['sdist'] = antlerinator_sdist
 
     # Patch editable_wheel only if available
     try:

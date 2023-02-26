@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2021-2023 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -199,7 +199,8 @@ def test_clean(tmpdir):
 
 def test_sdist(tmpdir):
     """
-    Test whether generated files are cleaned before creating an sdist.
+    Test whether generated files can be excluded from the sdist using
+    MANIFEST.in.
     """
     with tmpdir.as_cwd():
         dist = Distribution(dict(
@@ -216,6 +217,8 @@ def test_sdist(tmpdir):
         open(join('pkg', '__init__.py'), 'w').close()
         open(join('pkg', 'DummyLexer.py'), 'w').close()
         open(join('pkg', 'DummyParser.py'), 'w').close()
+        with open('MANIFEST.in', 'w') as f:
+            f.write('exclude pkg/Dummy*.py')
 
         sdist = dist.get_command_class('sdist')
         cmd = sdist(dist)

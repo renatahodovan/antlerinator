@@ -4,6 +4,18 @@
 
 .. start included documentation
 
+1!3.0.0
+=======
+
+Summary of changes:
+
+* Changed setuptools extension not to clean generated lexer/parser before
+  creating an sdist.
+* Dropped support for Python 3.5, bumped minimum Python requirement to 3.6.
+* Internal refactorings (to make use of new language features).
+* Improved testing infrastructure (testing Python 3.11; maintenance changes).
+
+
 1!2.1.0
 =======
 

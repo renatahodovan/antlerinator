@@ -5,12 +5,14 @@
 # This file may not be copied, modified, or distributed except
 # according to those terms.
 
-import pytest
 import sys
 
+from distutils.errors import DistutilsModuleError
 from os import makedirs
 from os.path import abspath, dirname, isfile, join
-from distutils.errors import DistutilsModuleError
+
+import pytest
+
 from setuptools.dist import Distribution
 
 import antlerinator
@@ -38,19 +40,19 @@ def test_build_antlr_providers(tmpdir):
     with tmpdir.as_cwd():
         antlr_jar_path = antlerinator.download(version=tested_antlr_version, path=join(str(tmpdir), 'antlr.jar'))
 
-        dist = Distribution(dict(
-            name='pkg',
-            script_name='setup.py',
-            script_args=['build_antlr'],
-            options=dict(
-                build_antlr=dict(
-                    commands=f'''
+        dist = Distribution({
+            'name': 'pkg',
+            'script_name': 'setup.py',
+            'script_args': ['build_antlr'],
+            'options': {
+                'build_antlr': {
+                    'commands': f'''
                         antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {tmpdir} -Xexact-output-dir
                         file:{antlr_jar_path} {join(resources_dir, "Bello.g4")} -Dlanguage=Python3 -o {tmpdir} -Xexact-output-dir
                     ''',
-                ),
-            ),
-        ))
+                },
+            },
+        })
 
         dist.parse_command_line()
         dist.run_commands()
@@ -66,17 +68,17 @@ def test_build_antlr_java(tmpdir):
     Test whether ``build_antlr`` can deal with a custom java VM.
     """
     with tmpdir.as_cwd():
-        dist = Distribution(dict(
-            name='pkg',
-            script_name='setup.py',
-            script_args=['build_antlr'],
-            options=dict(
-                build_antlr=dict(
-                    commands='file:antlr.jar Dummy.g4',
-                    java=f'{join(resources_dir, "mock_java")}{script_ext}',
-                ),
-            ),
-        ))
+        dist = Distribution({
+            'name': 'pkg',
+            'script_name': 'setup.py',
+            'script_args': ['build_antlr'],
+            'options': {
+                'build_antlr': {
+                    'commands': 'file:antlr.jar Dummy.g4',
+                    'java': f'{join(resources_dir, "mock_java")}{script_ext}',
+                },
+            },
+        })
 
         dist.parse_command_line()
         dist.run_commands()
@@ -92,19 +94,20 @@ def test_build(tmpdir):
     command is invoked (which is also invoked during ``install``).
     """
     with tmpdir.as_cwd():
-        dist = Distribution(dict(
-            name='pkg',
-            packages=['pkg'],
-            script_name='setup.py',
-            script_args=['build', f'--build-lib={join("build", "lib")}'],  # NOTE: --build-lib is necessary to ensure that purelib build directory is used
-            options=dict(
-                build_antlr=dict(
-                    commands=f'antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {join(str(tmpdir), "pkg")} -Xexact-output-dir',
-                ),
-            ),
-        ))
+        dist = Distribution({
+            'name': 'pkg',
+            'packages': ['pkg'],
+            'script_name': 'setup.py',
+            'script_args': ['build', f'--build-lib={join("build", "lib")}'],  # NOTE: --build-lib is necessary to ensure that purelib build directory is used
+            'options': {
+                'build_antlr': {
+                    'commands': f'antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {join(str(tmpdir), "pkg")} -Xexact-output-dir',
+                },
+            },
+        })
         makedirs('pkg')
-        open(join('pkg', '__init__.py'), 'w').close()
+        with open(join('pkg', '__init__.py'), 'w'):
+            pass
 
         dist.parse_command_line()
         dist.run_commands()
@@ -119,19 +122,20 @@ def test_develop(tmpdir):
     development mode).
     """
     with tmpdir.as_cwd():
-        dist = Distribution(dict(
-            name='pkg',
-            packages=['pkg'],
-            script_name='setup.py',
-            script_args=['develop'],
-            options=dict(
-                build_antlr=dict(
-                    commands=f'antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {join(str(tmpdir), "pkg")} -Xexact-output-dir',
-                ),
-            ),
-        ))
+        dist = Distribution({
+            'name': 'pkg',
+            'packages': ['pkg'],
+            'script_name': 'setup.py',
+            'script_args': ['develop'],
+            'options': {
+                'build_antlr': {
+                    'commands': f'antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {join(str(tmpdir), "pkg")} -Xexact-output-dir',
+                },
+            },
+        })
         makedirs('pkg')
-        open(join('pkg', '__init__.py'), 'w').close()
+        with open(join('pkg', '__init__.py'), 'w'):
+            pass
 
         dist.parse_command_line()
         dist.run_commands()
@@ -147,19 +151,20 @@ def test_editable_wheel(tmpdir):
     editable wheels).
     """
     with tmpdir.as_cwd():
-        dist = Distribution(dict(
-            name='pkg',
-            packages=['pkg'],
-            script_name='setup.py',
-            script_args=['editable_wheel'],
-            options=dict(
-                build_antlr=dict(
-                    commands=f'antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {join(str(tmpdir), "pkg")} -Xexact-output-dir',
-                ),
-            ),
-        ))
+        dist = Distribution({
+            'name': 'pkg',
+            'packages': ['pkg'],
+            'script_name': 'setup.py',
+            'script_args': ['editable_wheel'],
+            'options': {
+                'build_antlr': {
+                    'commands': f'antlerinator:{tested_antlr_version} {join(resources_dir, "Hello.g4")} -Dlanguage=Python3 -o {join(str(tmpdir), "pkg")} -Xexact-output-dir',
+                },
+            },
+        })
         makedirs('pkg')
-        open(join('pkg', '__init__.py'), 'w').close()
+        with open(join('pkg', '__init__.py'), 'w'):
+            pass
 
         dist.parse_command_line()
         dist.run_commands()
@@ -173,21 +178,24 @@ def test_clean(tmpdir):
     Test whether cleanup removes generated files.
     """
     with tmpdir.as_cwd():
-        dist = Distribution(dict(
-            name='pkg',
-            packages=['pkg'],
-            script_name='setup.py',
-            script_args=['clean'],
-            options=dict(
-                build_antlr=dict(
-                    output=join('pkg', 'Dummy*.py'),
-                ),
-            ),
-        ))
+        dist = Distribution({
+            'name': 'pkg',
+            'packages': ['pkg'],
+            'script_name': 'setup.py',
+            'script_args': ['clean'],
+            'options': {
+                'build_antlr': {
+                    'output': join('pkg', 'Dummy*.py'),
+                },
+            },
+        })
         makedirs('pkg')
-        open(join('pkg', '__init__.py'), 'w').close()
-        open(join('pkg', 'DummyLexer.py'), 'w').close()
-        open(join('pkg', 'DummyParser.py'), 'w').close()
+        with open(join('pkg', '__init__.py'), 'w'):
+            pass
+        with open(join('pkg', 'DummyLexer.py'), 'w'):
+            pass
+        with open(join('pkg', 'DummyParser.py'), 'w'):
+            pass
 
         dist.parse_command_line()
         dist.run_commands()
@@ -203,20 +211,23 @@ def test_sdist(tmpdir):
     MANIFEST.in.
     """
     with tmpdir.as_cwd():
-        dist = Distribution(dict(
-            name='pkg',
-            packages=['pkg'],
-            script_name='setup.py',
-            options=dict(
-                build_antlr=dict(
-                    output=join('pkg', 'Dummy*.py'),
-                ),
-            ),
-        ))
+        dist = Distribution({
+            'name': 'pkg',
+            'packages': ['pkg'],
+            'script_name': 'setup.py',
+            'options': {
+                'build_antlr': {
+                    'output': join('pkg', 'Dummy*.py'),
+                },
+            },
+        })
         makedirs('pkg')
-        open(join('pkg', '__init__.py'), 'w').close()
-        open(join('pkg', 'DummyLexer.py'), 'w').close()
-        open(join('pkg', 'DummyParser.py'), 'w').close()
+        with open(join('pkg', '__init__.py'), 'w'):
+            pass
+        with open(join('pkg', 'DummyLexer.py'), 'w'):
+            pass
+        with open(join('pkg', 'DummyParser.py'), 'w'):
+            pass
         with open('MANIFEST.in', 'w') as f:
             f.write('exclude pkg/Dummy*.py')
 

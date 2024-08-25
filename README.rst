@@ -20,7 +20,7 @@ ANTLR v4 in sync.
 Requirements
 ============
 
-* Python_ >= 3.7
+* Python_ >= 3.8
 * Java_ SE >= 7 JRE or JDK (the latter is optional)
 
 .. _Python: https://www.python.org

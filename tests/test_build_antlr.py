@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2021-2024 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -7,13 +7,13 @@
 
 import sys
 
-from distutils.errors import DistutilsModuleError
 from os import makedirs
 from os.path import abspath, dirname, isfile, join
 
 import pytest
 
 from setuptools.dist import Distribution
+from setuptools.errors import ModuleError
 
 import antlerinator
 
@@ -27,7 +27,7 @@ resources_dir = join(dirname(abspath(__file__)), 'resources')
 try:
     Distribution().get_command_class('editable_wheel')
     has_editable_wheel = True
-except DistutilsModuleError:
+except ModuleError:
     has_editable_wheel = False
 
 

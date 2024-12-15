@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2021-2024 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -11,8 +11,8 @@ import re
 import shlex
 import sys
 
-from distutils.errors import DistutilsModuleError, DistutilsOptionError
 from setuptools import Command
+from setuptools.errors import ModuleError, OptionError
 
 from .download import download
 
@@ -44,7 +44,7 @@ class build_antlr(Command):
             commands = [cmd.strip() for cmd in commands if cmd.strip()]
 
         if not isinstance(commands, list):
-            raise DistutilsOptionError(f"'commands' must be a list of strings or tuples (got {commands!r})")
+            raise OptionError(f"'commands' must be a list of strings or tuples (got {commands!r})")
 
         cmd_re = re.compile('^(?P<provider>^[^\\d\\W]\\w*):(?P<provider_arg>\\S*)\\s+(?P<antlr_args>.*)$')
         providers = {
@@ -57,21 +57,21 @@ class build_antlr(Command):
             if isinstance(cmd, str):
                 m = cmd_re.match(cmd)
                 if not m:
-                    raise DistutilsOptionError(f"strings in 'commands' must start with a 'provider:arg' pattern (got {cmd!r})")
+                    raise OptionError(f"strings in 'commands' must start with a 'provider:arg' pattern (got {cmd!r})")
                 provider, provider_arg, antlr_args = m.group('provider', 'provider_arg', 'antlr_args')
 
                 provider = providers.get(provider)
                 if not provider:
-                    raise DistutilsOptionError(f"unknown provider in 'commands' (options: {', '.join(providers.keys())}; got: {provider})")
+                    raise OptionError(f"unknown provider in 'commands' (options: {', '.join(providers.keys())}; got: {provider})")
                 antlr_args = tuple(shlex.split(antlr_args, posix=posix))
 
                 cmd = (provider, provider_arg, antlr_args)
 
             if isinstance(cmd, tuple):
                 if len(cmd) != 3:
-                    raise DistutilsOptionError(f"tuples in 'commands' must be 3-tuples (got {cmd!r})")
+                    raise OptionError(f"tuples in 'commands' must be 3-tuples (got {cmd!r})")
             else:
-                raise DistutilsOptionError(f"elements in 'commands' must be strings or tuples (got {commands!r})")
+                raise OptionError(f"elements in 'commands' must be strings or tuples (got {commands!r})")
 
             commands[i] = cmd
 
@@ -143,5 +143,5 @@ def register(dist):
                 editable_wheel.run(self)
 
         dist.cmdclass['editable_wheel'] = antlerinator_editable_wheel
-    except DistutilsModuleError:
+    except ModuleError:
         pass

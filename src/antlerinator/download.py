@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2022 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2017-2024 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -10,14 +10,10 @@ import errno
 import ssl
 
 from argparse import ArgumentParser
+from importlib import metadata
 from os import makedirs
 from os.path import basename, dirname, exists, expanduser, join
 from urllib.request import urlopen
-
-try:
-    from importlib import metadata
-except ImportError:
-    import importlib_metadata as metadata
 
 import inators
 

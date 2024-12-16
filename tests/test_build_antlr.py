@@ -21,7 +21,7 @@ import antlerinator
 is_windows = sys.platform.startswith('win32')
 script_ext = '.bat' if is_windows else '.sh'
 
-tested_antlr_version = '4.9.2'
+tested_antlr_version = '4.13.2'
 resources_dir = join(dirname(abspath(__file__)), 'resources')
 
 try:

@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2024 Renata Hodovan, Akos Kiss.
+# Copyright (c) 2021-2025 Renata Hodovan, Akos Kiss.
 #
 # Licensed under the BSD 3-Clause License
 # <LICENSE.rst or https://opensource.org/licenses/BSD-3-Clause>.
@@ -136,6 +136,8 @@ def test_develop(tmpdir):
         makedirs('pkg')
         with open(join('pkg', '__init__.py'), 'w'):
             pass
+        with open('setup.py', 'w') as f:
+            f.write('from setuptools import setup; setup(name="pkg", packages=["pkg"])')
 
         dist.parse_command_line()
         dist.run_commands()

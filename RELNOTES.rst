@@ -4,6 +4,21 @@
 
 .. start included documentation
 
+1!3.0.1
+=======
+
+Summary of changes:
+
+* Improved code internals of setuptools extension (remove reference to
+  deprecated Distutils).
+* Improved testing (on Python 3.12, 3.13, and on PyPy 3.11; also linting tests;
+  bumped ANTLR version in tests to 4.13.2; editable installs via development
+  mode).
+* Improved package metadata.
+* Improved documentation (switched to furo theme).
+* Dropped support for Python 3.6, 3.7, and 3.8.
+
+
 1!3.0.0
 =======
 
